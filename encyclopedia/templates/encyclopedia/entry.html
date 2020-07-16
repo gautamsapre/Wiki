@@ -4,8 +4,5 @@
     Encyclopedia
 {% endblock %}
 {% block body %}
-    <h1>{{entry}}</h1>
-
-  
-
+    {{ entry |safe }}
 {% endblock %}
