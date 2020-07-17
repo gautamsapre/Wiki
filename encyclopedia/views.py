@@ -14,15 +14,18 @@ def index(request):
 
 
 def entry(request):
-    not_found=[]
     s = request.POST['q']
+    not_found=[]
+    return similar_results(request, s,not_found)
+
+def givenEntry(request, s):
+    not_found=[]
     if util.get_entry(s) != None:
         return  render(request, "encyclopedia/entry.html", {
         "entry": convert_md(util.get_entry(s))
         })
     else:
         return similar_results(request, s, not_found)
-
 
 def similar_results(request, s,  not_found):
     for entry in util.list_entries():
@@ -42,4 +45,3 @@ def convert_md(md_file):
     md = markdown2.markdown(md_file)
     return md
  
-

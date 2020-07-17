@@ -6,13 +6,11 @@
 
 {% block body %}
     <h1>All Pages</h1>
-
-    <form action= "{% url 'entry' %}" method ="POST">
-        {% csrf_token %}
         <ul>
             {% for entry in entries %}
-                <li> <input class = "btn" type="submit" name = q  value={{ entry }} ></li>
+                
+                <li><a href="wiki/{{ entry }}">{{ entry }}</a></li>
             {% endfor %}
         </ul>
-        </form>
+       
 {% endblock %}
