@@ -16,13 +16,13 @@ def index(request):
     })
 
 def entry(request):
-    s = request.POST['q']
-    return similar_results(request, s)
+    return redirect('givenEntry', request.POST['q'])
 
 def givenEntry(request, s):
     if util.get_entry(s) != None:
         return  render(request, "encyclopedia/entry.html", {
-        "entry": convert_md(util.get_entry(s))
+        "entry": convert_md(util.get_entry(s)),
+        "entry_name": s
         })
     else:
         return similar_results(request, s)
@@ -35,7 +35,8 @@ def similar_results(request, s):
                 not_found.append(entry)
     if len(not_found) == 0:
         return  render(request, "encyclopedia/entry.html", {
-            "entry": util.get_entry(s)
+            "entry": util.get_entry(s),
+            "entry_name": s
         })
     else:
         return render(request, "encyclopedia/index.html", {
@@ -48,3 +49,9 @@ def convert_md(md_file):
 
 def redir(request):
     return redirect('givenEntry', util.list_entries()[random.randint(0,len(util.list_entries())-1)])
+
+
+def edit(request,s):
+    return render(request, "encyclopedia/add.html", {
+        
+    })
