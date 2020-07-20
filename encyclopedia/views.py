@@ -52,6 +52,11 @@ def redir(request):
 
 
 def edit(request,s):
-    return render(request, "encyclopedia/add.html", {
-        
+    return render(request, "encyclopedia/edit.html", {
+        "entryname": s,
+        "entry": util.get_entry(s)
     })
+
+def confirmEdit(request,s):
+    util.save_entry(s, request.POST['content'])
+    return redirect('givenEntry', s)
