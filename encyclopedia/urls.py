@@ -9,5 +9,8 @@ urlpatterns = [
     path("wiki/<s>", views.givenEntry, name = "givenEntry"),
     path("redir", views.redir, name="redir"),
     path("wiki/<s>/edit", views.edit, name="edit"),
-    path("wiki/<s>/edit1", views.confirmEdit, name="confirmEdit")
+    path("wiki/<title>/edit1", views.confirmEdit, name="confirmEdit"),
+    path("add", views.add, name="add"),
+    path("addNew", views.addNew, name="addNew")
+
 ]

@@ -57,6 +57,22 @@ def edit(request,s):
         "entry": util.get_entry(s)
     })
 
-def confirmEdit(request,s):
-    util.save_entry(s, request.POST['content'])
-    return redirect('givenEntry', s)
+def confirmEdit(request,title):
+    util.save_entry(title, request.POST['content'])
+    return redirect('givenEntry', title)
+
+def add(request):
+    return render(request, "encyclopedia/add.html", { 
+        "err": False
+    })
+
+def addNew(request):
+    title = request.POST['title'].replace(" ", "_")
+    if (util.entry_exists( f"entries/{title}.md")):
+        return render(request, "encyclopedia/add.html", {
+        "fill": request.POST['content'],    
+        "err": True
+    })
+    else:
+        util.save_entry(title, request.POST['content'])
+        return redirect('givenEntry', title)
