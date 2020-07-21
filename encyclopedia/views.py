@@ -17,7 +17,10 @@ def index(request):
     })
 
 def entry(request):
-    return redirect('givenEntry', request.POST['q'])
+    if (request.POST['q'] == ""):
+        return redirect('givenEntry', " ")
+    else:
+        return redirect('givenEntry', request.POST['q'])
 
 def givenEntry(request, s):
     if util.get_entry(s) != None:
