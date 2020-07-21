@@ -5,12 +5,22 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+    {% if err %}
+        <h3>Entry "{{ent}}" does not exist...</h3></br></br>
+        {% if similar %}
+            <h5>Similar results...</h5>
+        {% endif %}
+    {% else %}
+        <h1>All Pages</h1>
+    {% endif %}
         <ul>
             {% for entry in entries %}
-                
-                <li><a href="wiki/{{ entry }}">{{ entry }}</a></li>
+                <li><a href="/wiki/{{ entry }}">{{ entry }}</a></li>
             {% endfor %}
         </ul>
+
+    {% if err %}
+        <h5><a href="/add">Click here!</a> to create new page called {{ent}}</h5>
+    {% endif %}
        
 {% endblock %}
