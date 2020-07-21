@@ -11,6 +11,6 @@ urlpatterns = [
     path("wiki/<s>/edit", views.edit, name="edit"),
     path("wiki/<title>/edit1", views.confirmEdit, name="confirmEdit"),
     path("add", views.add, name="add"),
-    path("addNew", views.addNew, name="addNew")
-
+    path("addNew", views.addNew, name="addNew"),
+    path("nonexistant",  views.dne, name="nonexistant")
 ]

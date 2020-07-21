@@ -12,6 +12,7 @@ from . import util
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
+        "err": False,
         "entries": util.list_entries()
     })
 
@@ -33,13 +34,10 @@ def similar_results(request, s):
             ent = entry.lower()
             if ent.find(s.lower()) != -1:
                 not_found.append(entry)
-    if len(not_found) == 0:
-        return  render(request, "encyclopedia/entry.html", {
-            "entry": util.get_entry(s),
-            "entry_name": s
-        })
-    else:
-        return render(request, "encyclopedia/index.html", {
+    return render(request, "encyclopedia/index.html", {
+            "similar": len(not_found) >= 1,
+            "ent": s,
+            "err":True,
             "entries": not_found
         })
 
@@ -49,7 +47,6 @@ def convert_md(md_file):
 
 def redir(request):
     return redirect('givenEntry', util.list_entries()[random.randint(0,len(util.list_entries())-1)])
-
 
 def edit(request,s):
     return render(request, "encyclopedia/edit.html", {
@@ -76,3 +73,6 @@ def addNew(request):
     else:
         util.save_entry(title, request.POST['content'])
         return redirect('givenEntry', title)
+
+def dne(request):
+    return none

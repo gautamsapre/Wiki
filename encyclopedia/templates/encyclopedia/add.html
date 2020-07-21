@@ -6,13 +6,15 @@
 
 
 {% block add %}
+    <h4>Create a New entry...</h4>
     <form action= "addNew" method ="POST"> 
     {% csrf_token %}
         <Label>Title: </Label></br>
         <input type="text" name="title" placeholder="Enter Title of New Page"></br>
         {% if err %}
-            <p class="error">Error, title Already taken try again</p></br></br>
+            <p class="error">Error, title Already taken try again</p>
         {% endif %}
+        </br></br>
         <Label>Content:</Label></br>
         <textarea name="content" rows="10" cols="30">{{fill}}{{entry}}</textarea></br>
         <input type="submit">
