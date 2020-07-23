@@ -11,10 +11,7 @@ from . import util
 
 
 def index(request):
-    return render(request, "encyclopedia/index.html", {
-        "err": False,
-        "entries": util.list_entries()
-    })
+    return redirect('givenEntry', "TITLE")
 
 def entry(request):
     if (request.POST['q'] == ""):
@@ -23,6 +20,11 @@ def entry(request):
         return redirect('givenEntry', request.POST['q'])
 
 def givenEntry(request, s):
+    if s.lower() == "title":
+        return render(request, "encyclopedia/index.html", {
+        "err": False,
+        "entries": util.list_entries()
+    })
     if util.get_entry(s) != None:
         return  render(request, "encyclopedia/entry.html", {
         "entry": convert_md(util.get_entry(s)),
